@@ -1,5 +1,16 @@
+require 'open-uri'
+
 class HomeController < ApplicationController
   before_action :check_or_create_cloudfront_private_key
+
+  def direct_image_link
+    cookies_str = cookies.map { |x| x.join('=') }.join('; ')
+
+    send_file(
+      OpenURI.open_uri('https://assets.neo-kobe-city.com/min_yuyake3.jpg', { 'Cookie' => cookies_str }),
+      filename: 'min_yuyake3.jpg'
+    )
+  end
 
   def index
     @cookies = cookies.to_h
@@ -46,7 +57,7 @@ class HomeController < ApplicationController
                    when 'with_subdomain'
                      { value: v, domain: 'www.neo-kobe-city.com' }
                    else
-                     { value: v, same_site: 'None', secure: true }
+                     { value: v }
                    end
     end
   end
