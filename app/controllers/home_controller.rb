@@ -1,5 +1,7 @@
 class HomeController < ApplicationController
   def index
+    check_or_create_cloudfront_private_key
+
     signer = Aws::CloudFront::CookieSigner.new(
       key_pair_id: ENV.fetch('CLOUDFRONT_PUBLIC_KEY'),
       private_key_path: Rails.root.join('config/cloudfront_private_key.pem').to_s
@@ -50,5 +52,13 @@ class HomeController < ApplicationController
 
   def object_path(path='*')
     "https://assets.neo-kobe-city.com/#{path}"
+  end
+
+  def check_or_create_cloudfront_private_key
+    private_key_path = Rails.root.join('config/cloudfront_private_key.pem')
+
+    return if File.exist?(private_key_path)
+
+    File.write(private_key_path, ENV.fetch('CLOUDFRONT_PRIVATE_KEY'))
   end
 end
