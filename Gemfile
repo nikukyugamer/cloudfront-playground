@@ -3,6 +3,7 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 ruby '3.1.2'
 
+gem 'aws-sdk-cloudfront'
 gem 'bootsnap', require: false
 gem 'dotenv-rails'
 gem 'importmap-rails'
