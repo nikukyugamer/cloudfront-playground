@@ -1,0 +1,63 @@
+name: プレイグラウンド
+
+on:
+  push:
+  workflow_dispatch:
+
+jobs:
+  free_playground:
+    name: Free Playground CI
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: ['18.x']
+        ruby-version: ['3.1']
+    services:
+      postgres:
+        image: postgres:14.3
+        ports:
+          - 5432:5432
+        env:
+          POSTGRES_USER: postgres_user
+          POSTGRES_PASSWORD: postgres_password
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+    env:
+      CI: true
+      RAILS_ENV: test
+      POSTGRES_HOST_TEST: localhost
+      POSTGRES_PORT_TEST: 5432
+      POSTGRES_USERNAME_TEST: postgres_user
+      POSTGRES_PASSWORD_TEST: postgres_password
+    steps:
+    - name: コードをチェックアウトする
+      uses: actions/checkout@v3
+    - name: Ruby のセットアップを行う
+      uses: ruby/setup-ruby@v1
+      with:
+        ruby-version: ${{ matrix.ruby-version }}
+        bundler-cache: true
+    - name: $ bundle install を行う
+      uses: actions/cache@v3
+      with:
+        path: vendor/bundle
+        key: ${{ runner.os }}-gem-${{ hashFiles('**/Gemfile.lock') }}
+        restore-keys: |
+          ${{ runner.os }}-gem-
+    - name: Node.js のセットアップを行う
+      uses: actions/setup-node@v3
+      with:
+        node-version: ${{ matrix.node-version }}
+        cache: yarn
+    - name: データベースをセットアップする
+      run: |
+        bin/rails db:prepare
+    - name: （予定地）RuboCop を実行する
+      run: |
+        echo "bundle exec rubocop"
+    - name: （予定地）RSpec を実行する
+      run: |
+        echo "bundle exec rspec"

@@ -23,3 +23,4 @@
 config/cloudfront_private_key.pem
 
 vendor/
+node_modules/
