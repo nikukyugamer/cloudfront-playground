@@ -19,7 +19,7 @@ class SignedCookiesService
           'Resource' => 'http*://assets.neo-kobe-city.com/*',
           'Condition' => {
             DateLessThan: {
-              'AWS:EpochTime' => 5.minutes.since.to_i
+              'AWS:EpochTime' => 1.minute.since.to_i
             }
           }
           # "IpAddress" => {
