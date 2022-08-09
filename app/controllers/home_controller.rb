@@ -65,6 +65,8 @@ class HomeController < ApplicationController
     end
   end
 
+  # https://koseki.hatenablog.com/entry/20070109/cookiedelete
+  # https://stackoverflow.com/questions/6104090/deleting-cookies-from-a-controller
   def discard_cookies
     domains = [
       '.foo.neo-kobe-city.com',
@@ -77,8 +79,7 @@ class HomeController < ApplicationController
 
     domains.each do |domain|
       cookies.each do |k, _v|
-        cookies.delete(k)
-        cookies.delete(k, domain: domain, path: '/')
+        cookies[k.to_sym] = { value: '', path: '/', expires: Time.zone.at(0) }
       end
     end
   end
