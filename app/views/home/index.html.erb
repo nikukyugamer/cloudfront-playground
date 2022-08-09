@@ -1,11 +1,11 @@
-<h2>■<%= link_to "クッキーを食べる (domain: foo.neo-kobe-city.com)", eat_cookies_path(cookie_domain: 'with_subdomain') %></h2>
+<h2>■<%= link_to "クッキーを食べる (domain: www.neo-kobe-city.com)", eat_cookies_path %></h2>
 <h2>■<%= link_to "クッキーを食べる (domain: neo-kobe-city.com)", eat_cookies_path(cookie_domain: 'without_subdomain') %></h2>
-<h2>■<%= link_to "クッキーを食べる (domain: デフォルト www.neo-kobe-city.com)", eat_cookies_path %></h2>
 <h2>■<%= link_to "クッキーを捨てる", discard_cookies_path %></h2>
 
 <h2><%= @min_tobus2_url %></h2>
 <%= image_tag @min_tobus2_url, height: 400 %>
-<%= link_to 'Cookies 付きダイレクトURLリンク', direct_image_link_path %>
+
+<p><%= link_to 'Cookies 付き 直接ダウンロードリンク', direct_image_link_path %></p>
 
 <hr>
 
