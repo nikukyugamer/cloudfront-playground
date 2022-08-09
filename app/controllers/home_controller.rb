@@ -40,12 +40,12 @@ class HomeController < ApplicationController
 
     @cookies = cookies.to_h
 
-    @min_tobus2_url = 'https://assets.neo-kobe-city.com/min-tobus2.jpg'
-    @min_tukimi3_url = 'https://assets.neo-kobe-city.com/min-tukimi3.jpg'
-    @min_undokai1_url = 'https://assets.neo-kobe-city.com/min-undokai1.jpg'
-    @min_up1_url = 'https://assets.neo-kobe-city.com/min-up1.jpg'
-    @min_xmas3_url = 'https://assets.neo-kobe-city.com/min-xmas3.jpg'
-    @min_yuyake3_url = 'https://assets.neo-kobe-city.com/min-yuyake3.jpg'
+    @min_tobus2_url = 'https://assets.neo-kobe-city.com/min_tobus2.jpg'
+    @min_tukimi3_url = 'https://assets.neo-kobe-city.com/min_tukimi3.jpg'
+    @min_undokai1_url = 'https://assets.neo-kobe-city.com/min_undokai1.jpg'
+    @min_up1_url = 'https://assets.neo-kobe-city.com/min_up1.jpg'
+    @min_xmas3_url = 'https://assets.neo-kobe-city.com/min_xmas3.jpg'
+    @min_yuyake3_url = 'https://assets.neo-kobe-city.com/min_yuyake3.jpg'
   end
 
   private
