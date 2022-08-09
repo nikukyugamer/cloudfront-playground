@@ -57,10 +57,8 @@ class HomeController < ApplicationController
       cookies[k] = case params[:cookie_domain]
                    when 'without_subdomain'
                      { value: v, domain: 'neo-kobe-city.com' }
-                   when 'with_subdomain'
-                     { value: v, domain: 'foo.neo-kobe-city.com' }
                    else
-                     { value: v }
+                     { value: v } # domain: request.host
                    end
     end
   end
@@ -77,9 +75,12 @@ class HomeController < ApplicationController
       'www.neo-kobe-city.com',
     ]
 
+    # これでも消えない時がある
     domains.each do |domain|
       cookies.each do |k, _v|
         cookies[k.to_sym] = { value: '', domain: domain, path: '/', expires: Time.zone.at(0) }
+        cookies.delete(k)
+        cookies.delete(k, domain: domain, path: '/')
       end
     end
   end
