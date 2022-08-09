@@ -58,7 +58,7 @@ class HomeController < ApplicationController
                    when 'without_subdomain'
                      { value: v, domain: 'neo-kobe-city.com' }
                    when 'with_subdomain'
-                     { value: v, domain: 'www.neo-kobe-city.com' }
+                     { value: v, domain: 'foo.neo-kobe-city.com' }
                    else
                      { value: v }
                    end
@@ -67,6 +67,8 @@ class HomeController < ApplicationController
 
   def discard_cookies
     domains = [
+      '.foo.neo-kobe-city.com',
+      'foo.neo-kobe-city.com',
       'neo-kobe-city.com',
       'www.neo-kobe-city.com',
     ]
