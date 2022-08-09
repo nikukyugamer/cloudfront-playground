@@ -35,18 +35,21 @@ class HomeController < ApplicationController
     policy_statement = {
       'Statement' => [
         {
-          'Resource' => object_path,
+          'Resource' => 'http*://assets.neo-kobe-city.com/*',
           'Condition' => {
             DateLessThan: {
               'AWS:EpochTime' => 2.minutes.since.to_i
             }
           }
+          # "IpAddress" => {
+          #   "AWS:SourceIp" => "#{request.remote_ip}/32"
+          # }
         },
       ]
     }
 
     cookie_params = signer.signed_cookie(
-      object_path(nil),
+      'https://assets.neo-kobe-city.com',
       policy: policy_statement.to_json
     )
 
@@ -75,10 +78,6 @@ class HomeController < ApplicationController
   end
 
   private
-
-  def object_path(path='*')
-    "https://assets.neo-kobe-city.com/#{path}"
-  end
 
   def check_or_create_cloudfront_private_key
     private_key_path = Rails.root.join('config/cloudfront_private_key.pem')
