@@ -69,13 +69,16 @@ class HomeController < ApplicationController
     domains = [
       '.foo.neo-kobe-city.com',
       'foo.neo-kobe-city.com',
+      '.neo-kobe-city.com',
       'neo-kobe-city.com',
+      '.www.neo-kobe-city.com',
       'www.neo-kobe-city.com',
     ]
 
-    cookies.each do |k, _v|
-      domains.each do |domain|
-        cookies.delete(k.to_sym, domain: domain, path: '/')
+    domains.each do |domain|
+      cookies.each do |k, _v|
+        cookies.delete(k)
+        cookies.delete(k, domain: domain, path: '/')
       end
     end
   end
