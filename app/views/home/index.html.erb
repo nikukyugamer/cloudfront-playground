@@ -2,15 +2,16 @@
 <h2>■<%= link_to "1分間有効なクッキーを食べる (domain: neo-kobe-city.com)", eat_cookies_path(cookie_domain: 'without_subdomain') %></h2>
 <h2>■<%= link_to "クッキーを捨てる（たまにうまくいかないので自分で捨てる方がいい）", discard_cookies_path %></h2>
 
-<h2><%= @min_tobus2_url %></h2>
-<%= image_tag @min_tobus2_url, height: 400 %>
+<hr>
 
+<%= image_tag @min_tobus2_url, height: 400 %>
+<p><%= @min_tobus2_url %></p>
 <p><%= link_to 'Cookies 付き 直接ダウンロードリンク', direct_image_link_path %></p>
 
 <hr>
 
-<h2><%= @min_xmas3_url %></h2>
 <%= image_tag @min_xmas3_url, height: 400 %>
+<p><%= @min_xmas3_url %></p>
 
 <hr>
 
