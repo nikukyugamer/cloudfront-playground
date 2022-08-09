@@ -1,0 +1,8 @@
+{
+  "name": "free-playground",
+  "version": "1.0.0",
+  "author": "Osamu Takiya <takiya@toran.sakura.ne.jp>",
+  "license": "MIT",
+  "main": "index.js",
+  "repository": "https://github.com/nikukyugamer/free-playground.git"
+}
