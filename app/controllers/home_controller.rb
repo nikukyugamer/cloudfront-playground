@@ -1,5 +1,19 @@
 class HomeController < ApplicationController
+  before_action :check_or_create_cloudfront_private_key
+
   def index
+    @cookies = cookies.to_h
+    @request_host = request.host
+
+    @min_tobus2_url = 'https://assets.neo-kobe-city.com/min_tobus2.jpg'
+    @min_tukimi3_url = 'https://assets.neo-kobe-city.com/min_tukimi3.jpg'
+    @min_undokai1_url = 'https://assets.neo-kobe-city.com/min_undokai1.jpg'
+    @min_up1_url = 'https://assets.neo-kobe-city.com/min_up1.jpg'
+    @min_xmas3_url = 'https://assets.neo-kobe-city.com/min_xmas3.jpg'
+    @min_yuyake3_url = 'https://assets.neo-kobe-city.com/min_yuyake3.jpg'
+  end
+
+  def eat_cookies
     check_or_create_cloudfront_private_key
 
     signer = Aws::CloudFront::CookieSigner.new(
@@ -13,7 +27,7 @@ class HomeController < ApplicationController
           'Resource' => object_path,
           'Condition' => {
             DateLessThan: {
-              'AWS:EpochTime' => 2.minutes.since.to_i
+              'AWS:EpochTime' => 1.minute.since.to_i
             }
           }
         },
@@ -27,25 +41,26 @@ class HomeController < ApplicationController
 
     cookie_params.each do |k, v|
       cookies[k] = case params[:cookie_domain]
-                   when 'domain'
-                     # assets.neo-kobe-city.com は cookie を受け入れることができることを確認する
+                   when 'without_subdomain'
                      { value: v, domain: 'neo-kobe-city.com' }
-                   when 'assets'
-                     # domain: www.neo-kobe-city.com のときは assets では受け入れられないことを確認する
-                     { value: v, domain: 'assets.neo-kobe-city.com' }
+                   when 'with_subdomain'
+                     { value: v, domain: 'www.neo-kobe-city.com' }
                    else
-                     { value: v }
+                     { value: v, domain: request.host }
                    end
     end
+  end
 
-    @cookies = cookies.to_h
+  def discard_cookies
+    cf_cookies_keys = [
+      'CloudFront-Key-Pair-Id',
+      'CloudFront-Policy',
+      'CloudFront-Signature',
+    ]
 
-    @min_tobus2_url = 'https://assets.neo-kobe-city.com/min_tobus2.jpg'
-    @min_tukimi3_url = 'https://assets.neo-kobe-city.com/min_tukimi3.jpg'
-    @min_undokai1_url = 'https://assets.neo-kobe-city.com/min_undokai1.jpg'
-    @min_up1_url = 'https://assets.neo-kobe-city.com/min_up1.jpg'
-    @min_xmas3_url = 'https://assets.neo-kobe-city.com/min_xmas3.jpg'
-    @min_yuyake3_url = 'https://assets.neo-kobe-city.com/min_yuyake3.jpg'
+    cf_cookies_keys.each do |key|
+      cookies.delete(key.to_sym)
+    end
   end
 
   private
