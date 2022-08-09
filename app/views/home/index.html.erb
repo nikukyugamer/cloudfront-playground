@@ -1,1 +1,14 @@
-<%= @foo %>
+<table border="1">
+  <tr>
+    <th>名前</th>
+    <th>値</th>
+  </tr>
+  <% @cookies.each do |k ,v| %>
+    <tr>
+      <td><%= k %></td>
+      <td><%= v %></td>
+    </tr>
+  <% end %>
+</table>
+
+<%= image_tag @min_tobus2_url %>
