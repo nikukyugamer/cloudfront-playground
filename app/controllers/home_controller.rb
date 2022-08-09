@@ -79,7 +79,7 @@ class HomeController < ApplicationController
 
     domains.each do |domain|
       cookies.each do |k, _v|
-        cookies[k.to_sym] = { value: '', path: '/', expires: Time.zone.at(0) }
+        cookies[k.to_sym] = { value: '', domain: domain, path: '/', expires: Time.zone.at(0) }
       end
     end
   end
