@@ -55,9 +55,9 @@ jobs:
     - name: データベースをセットアップする
       run: |
         bin/rails db:prepare
-    - name: （予定地）RuboCop を実行する
+    - name: RuboCop を実行する
       run: |
-        echo "bundle exec rubocop"
-    - name: （予定地）RSpec を実行する
+        bundle exec rubocop
+    - name: RSpec を実行する
       run: |
-        echo "bundle exec rspec"
+        bundle exec rspec
