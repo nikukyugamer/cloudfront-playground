@@ -1,0 +1,22 @@
+<hr>
+
+<h1>Cookies の一覧</h1>
+
+<table border="1">
+  <tr>
+    <th>名前</th>
+    <th>値</th>
+  </tr>
+  <% @cookies.each do |k ,v| %>
+    <tr>
+      <td><%= k %></td>
+      <td><%= v %></td>
+    </tr>
+  <% end %>
+</table>
+
+<br>
+<hr>
+
+<h1>request.host</h1>
+<h4><%= @request_host %></h4>

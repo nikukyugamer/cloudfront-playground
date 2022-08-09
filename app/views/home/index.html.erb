@@ -1,22 +1,19 @@
-<table border="1">
-  <tr>
-    <th>名前</th>
-    <th>値</th>
-  </tr>
-  <% @cookies.each do |k ,v| %>
-    <tr>
-      <td><%= k %></td>
-      <td><%= v %></td>
-    </tr>
-  <% end %>
-</table>
-
-<hr>
+<h2>■<%= link_to "クッキーを食べる (domain: www.neo-kobe-city.com)", eat_cookies_path(cookie_domain: 'without_subdomain') %></h2>
+<h2>■<%= link_to "クッキーを食べる (domain: neo-kobe-city.com)", eat_cookies_path(cookie_domain: 'with_subdomain') %></h2>
+<h2>■<%= link_to "クッキーを食べる (domain: デフォルト)", eat_cookies_path %></h2>
+<h2>■<%= link_to "クッキーを捨てる", discard_cookies_path %></h2>
 
 <h2><%= @min_tobus2_url %></h2>
-<%= image_tag @min_tobus2_url %>
+<%= image_tag @min_tobus2_url, height: 400 %>
 
 <hr>
 
 <h2><%= @min_xmas3_url %></h2>
-<%= image_tag @min_xmas3_url %>
+<%= image_tag @min_xmas3_url, height: 400 %>
+
+<hr>
+
+<h2>iframe (www.nintendo.co.jp)</h2>
+<iframe id="my_inline_frame" width="800" height="600" src="https://www.nintendo.co.jp/"></iframe>
+
+<%= render 'shared/basic_info' %>
