@@ -46,7 +46,7 @@ class HomeController < ApplicationController
     }
 
     cookie_params = signer.signed_cookie(
-      object_path,
+      object_path(nil),
       policy: policy_statement.to_json
     )
 
