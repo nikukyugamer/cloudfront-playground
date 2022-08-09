@@ -66,14 +66,8 @@ class HomeController < ApplicationController
   end
 
   def discard_cookies
-    cf_cookies_keys = [
-      'CloudFront-Key-Pair-Id',
-      'CloudFront-Policy',
-      'CloudFront-Signature',
-    ]
-
-    cf_cookies_keys.each do |key|
-      cookies.delete(key.to_sym)
+    cookies.each do |k, _v|
+      cookies.delete(k.to_sym)
     end
   end
 
