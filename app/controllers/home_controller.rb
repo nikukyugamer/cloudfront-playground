@@ -46,7 +46,7 @@ class HomeController < ApplicationController
                    when 'with_subdomain'
                      { value: v, domain: 'www.neo-kobe-city.com' }
                    else
-                     { value: v }
+                     { value: v, same_site: 'None', secure: true }
                    end
     end
   end
