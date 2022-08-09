@@ -27,7 +27,7 @@ class HomeController < ApplicationController
           'Resource' => object_path,
           'Condition' => {
             DateLessThan: {
-              'AWS:EpochTime' => 1.minute.since.to_i
+              'AWS:EpochTime' => 2.minutes.since.to_i
             }
           }
         },
@@ -46,7 +46,7 @@ class HomeController < ApplicationController
                    when 'with_subdomain'
                      { value: v, domain: 'www.neo-kobe-city.com' }
                    else
-                     { value: v, domain: request.host }
+                     { value: v }
                    end
     end
   end
