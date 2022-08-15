@@ -1,3 +1,5 @@
+<h1>trial_a</h1>
+
 <%= image_tag @min_tobus2_url, height: 400 %>
 <p><%= @min_tobus2_url %></p>
 <p><%= link_to 'Cookies 付き 直接ダウンロードリンク', direct_image_link_path %></p>
@@ -8,3 +10,10 @@
 <p><%= @min_xmas3_url %></p>
 
 <%= render 'shared/basic_info' %>
+
+<script>
+  const currentCookies = document.cookie;
+
+  console.log('document.coookie による Cookies の一覧（HttpOnly属性 が付与されているものは含まれない）')
+  console.log({ currentCookies });
+</script>
