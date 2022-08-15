@@ -13,5 +13,12 @@
 
   <body>
     <%= yield %>
+
+  <script>
+    const currentCookies = document.cookie;
+
+    console.log('document.coookie による Cookies の Key 一覧（HttpOnly属性 が付与されているものは含まれない）')
+    console.log(Object.keys(currentCookies));
+  </script>
   </body>
 </html>

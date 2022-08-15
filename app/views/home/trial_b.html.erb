@@ -1,8 +1,13 @@
-trial_b
+<h1>trial_b</h1>
+<h2>SameSite属性は 'None'</h2>
 
-<script>
-  const currentCookies = document.cookie;
+<%= image_tag @min_tobus2_url, height: 400 %>
+<p><%= @min_tobus2_url %></p>
+<p><%= link_to 'Cookies 付き 直接ダウンロードリンク', direct_image_link_path %></p>
 
-  console.log('document.coookie による Cookies の一覧（HttpOnly属性 が付与されているものは含まれない）')
-  console.log({ currentCookies });
-</script>
+<hr>
+
+<%= image_tag @min_xmas3_url, height: 400 %>
+<p><%= @min_xmas3_url %></p>
+
+<%= render 'shared/basic_info' %>
