@@ -56,7 +56,7 @@ class HomeController < ApplicationController
     )
 
     cookie_params.each do |k, v|
-      cookies[k] = { value: v, domain: cookie_domain, same_site: cookie_same_site }
+      cookies[k] = { value: v, domain: cookie_domain, same_site: cookie_same_site, secure: cookie_same_site == 'None' }
     end
   end
 
