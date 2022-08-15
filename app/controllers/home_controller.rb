@@ -16,20 +16,18 @@ class HomeController < ApplicationController
   def index; end
 
   def trial_a
-    # 'neo-kobe-city.com' とセットすることで '.neo-kobe-city.com' がセットされる
-    eat_cookies(domain: 'neo-kobe-city.com')
+    eat_cookies(domain: '.neo-kobe-city.com')
   end
 
   def trial_b
-    # 'neo-kobe-city.com' とセットすることで '.neo-kobe-city.com' がセットされる
-    eat_cookies(domain: 'neo-kobe-city.com', same_site: 'None')
+    eat_cookies(domain: '.neo-kobe-city.com', same_site: 'None')
   end
 
   def eat_cookies(domain: request.host, same_site: 'Lax')
     check_or_create_cloudfront_private_key
 
-    cookie_domain = params[:domain] || domain
-    cookie_same_site = params[:same_site] || same_site
+    cookie_domain = params[:cookie_domain] || domain
+    cookie_same_site = params[:cookie_same_site] || same_site
 
     signer = Aws::CloudFront::CookieSigner.new(
       key_pair_id: ENV.fetch('CLOUDFRONT_PUBLIC_KEY'),
