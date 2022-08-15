@@ -16,11 +16,13 @@ class HomeController < ApplicationController
   def index; end
 
   def trial_a
-    eat_cookies(domain: '.neo-kobe-city.com')
+    # 'neo-kobe-city.com' とセットすることで '.neo-kobe-city.com' がセットされる
+    eat_cookies(domain: 'neo-kobe-city.com')
   end
 
   def trial_b
-    eat_cookies(domain: '.neo-kobe-city.com', same_site: 'None')
+    # 'neo-kobe-city.com' とセットすることで '.neo-kobe-city.com' がセットされる
+    eat_cookies(domain: 'neo-kobe-city.com', same_site: 'None')
   end
 
   def eat_cookies(domain: request.host, same_site: 'Lax')
