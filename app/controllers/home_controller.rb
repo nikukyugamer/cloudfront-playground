@@ -19,10 +19,6 @@ class HomeController < ApplicationController
     eat_cookies(domain: '.neo-kobe-city.com')
   end
 
-  def trial_b
-    eat_cookies(domain: '.neo-kobe-city.com', same_site: 'None')
-  end
-
   def eat_cookies(domain: request.host, same_site: 'Lax')
     check_or_create_cloudfront_private_key
 
@@ -56,7 +52,6 @@ class HomeController < ApplicationController
     )
 
     cookie_params.each do |k, v|
-      # cookies[k] = { value: v, domain: cookie_domain }
       cookies[k] = { value: v, domain: cookie_domain, secure: true }
     end
   end
