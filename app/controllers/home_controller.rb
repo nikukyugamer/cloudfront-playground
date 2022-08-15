@@ -17,12 +17,12 @@ class HomeController < ApplicationController
 
   def trial_a
     # 'neo-kobe-city.com' とセットすることで '.neo-kobe-city.com' がセットされる
-    eat_cookies(domain: '.neo-kobe-city.com')
+    eat_cookies(domain: 'neo-kobe-city.com')
   end
 
   def trial_b
     # 'neo-kobe-city.com' とセットすることで '.neo-kobe-city.com' がセットされる
-    eat_cookies(domain: '.neo-kobe-city.com', same_site: 'None')
+    eat_cookies(domain: 'neo-kobe-city.com', same_site: 'None')
   end
 
   def eat_cookies(domain: request.host, same_site: 'Lax')
