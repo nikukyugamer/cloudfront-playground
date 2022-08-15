@@ -19,6 +19,8 @@ class HomeController < ApplicationController
     eat_cookies(without_subdomain: true)
   end
 
+  def trial_b; end
+
   def eat_cookies(without_subdomain: false)
     check_or_create_cloudfront_private_key
 
