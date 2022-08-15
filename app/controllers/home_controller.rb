@@ -27,7 +27,7 @@ class HomeController < ApplicationController
     check_or_create_cloudfront_private_key
 
     cookie_domain = params[:cookie_domain] || domain
-    cookie_same_site = params[:cookie_same_site] || same_site
+    _cookie_same_site = params[:cookie_same_site] || same_site
 
     signer = Aws::CloudFront::CookieSigner.new(
       key_pair_id: ENV.fetch('CLOUDFRONT_PUBLIC_KEY'),
@@ -56,7 +56,7 @@ class HomeController < ApplicationController
     )
 
     cookie_params.each do |k, v|
-      cookies[k] = { value: v, domain: cookie_domain, same_site: cookie_same_site }
+      cookies[k] = { value: v, domain: cookie_domain }
     end
   end
 
