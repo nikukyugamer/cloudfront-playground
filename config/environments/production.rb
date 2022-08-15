@@ -38,7 +38,8 @@ Rails.application.configure do
   # config.action_dispatch.x_sendfile_header = "X-Accel-Redirect" # for NGINX
   config.action_dispatch.default_headers = { 'X-Frame-Options' => 'ALLOWALL' }
   # https://github.com/pschinis/rails_same_site_cookie/issues/31
-  config.action_dispatch.cookies_same_site_protection = nil
+  # config.action_dispatch.cookies_same_site_protection = nil
+  config.action_dispatch.cookies_same_site_protection = :none
 
   # Store uploaded files on the local file system (see config/storage.yml for options).
   config.active_storage.service = :local
