@@ -16,12 +16,14 @@ class HomeController < ApplicationController
   def index; end
 
   def trial_a
-    eat_cookies(without_subdomain: true)
+    eat_cookies(domain: '.neo-kobe-city.com')
   end
 
-  def trial_b; end
+  def trial_b
+    eat_cookies(domain: '.neo-kobe-city.com', same_site: 'None')
+  end
 
-  def eat_cookies(without_subdomain: false)
+  def eat_cookies(domain: request.host, same_site: 'Lax')
     check_or_create_cloudfront_private_key
 
     signer = Aws::CloudFront::CookieSigner.new(
@@ -50,14 +52,8 @@ class HomeController < ApplicationController
       policy: policy_statement.to_json
     )
 
-    cookie_domain = if without_subdomain || params[:cookie_domain] == 'without_subdomain'
-                      '.neo-kobe-city.com'
-                    else
-                      request.host
-                    end
-
     cookie_params.each do |k, v|
-      cookies[k] = { value: v, domain: cookie_domain }
+      cookies[k] = { value: v, domain: domain, same_site: same_site }
     end
   end
 
